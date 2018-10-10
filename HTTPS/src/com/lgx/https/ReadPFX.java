@@ -14,7 +14,7 @@ import java.util.Enumeration;
 
 public class ReadPFX {
 
-	String pfxPath = "././resource/jiaohangtest.pfx";
+	String pfxPath = "././resource/client.pfx";
 	String pfxPassword = "111111";
 
 	// 读取KeyStore

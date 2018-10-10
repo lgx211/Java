@@ -9,7 +9,7 @@ import javax.crypto.Cipher;
 public class EncryAndDecry {
 
 	// 本地加密，服务器的公钥
-	// 因为没有网联的私钥，假装交行这边是服务器。
+	// 因为没有服务器的私钥，假装这边是服务器。
 	public String encryptDate(String data) throws Exception {
 		byte[] encryptByte = null;
 		ReadKeystore readKeystore = new ReadKeystore();
@@ -24,7 +24,7 @@ public class EncryAndDecry {
 	}
 
 	// 服务器解密，服务器的私钥
-	// 因为没有网联的私钥，假装交行这边是服务器。
+	// 因为没有服务器的私钥，假装这边是服务器。
 	public String decryptDate(String data) throws Exception {
 		byte[] decryptByte = null;
 

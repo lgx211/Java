@@ -14,13 +14,13 @@ import java.security.cert.CertificateFactory;
 
 public class ReadKeystore {
 
-	public String keyStorePath = "././resource/jiaohangtest.keystore";
-	public String certificatePath = "././resource/jiaohangtest.crt";
+	public String keyStorePath = "././resource/client.keystore";
+	public String certificatePath = "././resource/client.crt";
 	public String alias = "{3ff077c0-db58-4a2c-90d7-010189f6cefb}";
 	public String keyStorePassword = "111111";
 	public String aliasPassword = "111111";
 
-	public String trustCertificatePath = "././resource/wanglian-rsa.cer";
+	public String trustCertificatePath = "././resource/server.cer";
 
 	// 获得KeyStore
 	public KeyStore keyStoreFromKeystore() {
