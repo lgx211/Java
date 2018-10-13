@@ -19,6 +19,7 @@ public class ProxyHttps {
 		System.setProperty("javax.net.debug", "all");
 
 		String xmlServerURL = "https://www.baidu.com/";
+		
 		URL urlXMLServer = new URL(xmlServerURL);
 		// 我自己的代理服务器
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.31.219.169", 808));
@@ -27,7 +28,6 @@ public class ProxyHttps {
 		httpsURLConnection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 		httpsURLConnection.setDoInput(true);
 		httpsURLConnection.setDoOutput(true);
-		httpsURLConnection.setConnectTimeout(300000);
 		httpsURLConnection.setUseCaches(false);
 		httpsURLConnection.setRequestMethod("POST");
 		httpsURLConnection.connect();
