@@ -3,26 +3,31 @@ package com.lgx.ssl;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 /*
  * 经过代理服务器后，由代理服务器走HTTPS。
  */
-public class ProxyHttps {
+public class IpHttps {
 	public static void main(String[] args) throws Throwable {
 
 		// HTTPS详细过程
 		System.setProperty("javax.net.debug", "all");
 
-		String xmlServerURL = "https://www.baidu.com/";
-		
+		String xmlServerURL = "https://115.239.211.112/";
+
 		URL urlXMLServer = new URL(xmlServerURL);
 		// 我自己的代理服务器
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.31.219.169", 808));
-		HttpURLConnection httpsURLConnection = (HttpURLConnection) urlXMLServer.openConnection(proxy);
+		HttpsURLConnection httpsURLConnection = (HttpsURLConnection) urlXMLServer.openConnection(proxy);
+
+		httpsURLConnection.setHostnameVerifier(new NullHostnameVerifier());
 
 		httpsURLConnection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 		httpsURLConnection.setDoInput(true);
@@ -53,6 +58,12 @@ public class ProxyHttps {
 		in.close();
 
 		System.out.println(("getDataFromServer:" + result));
+	}
+
+	private static class NullHostnameVerifier implements HostnameVerifier {
+		public boolean verify(String hostname, SSLSession session) {
+			return true;
+		}
 	}
 
 }

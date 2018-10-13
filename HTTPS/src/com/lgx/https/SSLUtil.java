@@ -33,8 +33,7 @@ public class SSLUtil {
 		try {
 			// 连接
 			URL realUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) realUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
 
 			// 套接socket
 			if (connection instanceof HttpsURLConnection) {
@@ -73,11 +72,9 @@ public class SSLUtil {
 
 			// 读取URL的响应，返回的流。如果有错误，返回错误的信息
 			if (connection.getResponseCode() == 200) {
-				in = new BufferedReader(new InputStreamReader(connection
-						.getInputStream(), "UTF-8"));
+				in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 			} else {
-				in = new BufferedReader(new InputStreamReader(connection
-						.getErrorStream(), "UTF-8"));
+				in = new BufferedReader(new InputStreamReader(connection.getErrorStream(), "UTF-8"));
 			}
 
 			// 转字符串
@@ -115,8 +112,7 @@ public class SSLUtil {
 		if (sslContext == null) {
 			try {
 				// 服务器要验证客户端证书
-				KeyManagerFactory keyManagerFactory = KeyManagerFactory
-						.getInstance("SunX509");
+				KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
 				ReadKeystore readKeystore = new ReadKeystore();
 				KeyStore keyStore = readKeystore.keyStoreFromKeystore();
 				keyManagerFactory.init(keyStore, KEY_STORE_PASS.toCharArray());
@@ -129,13 +125,12 @@ public class SSLUtil {
 				sslContext = SSLContext.getInstance("TLSv1.2");
 				sslContext.init(keyManagers, trustManagers, new SecureRandom());
 
-				HttpsURLConnection
-						.setDefaultHostnameVerifier(new HostnameVerifier() {
-							public boolean verify(String hostname,
-									SSLSession session) {
-								return true;
-							}
-						});
+				// IP连接HTTPS，绕过证书校验
+				HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+					public boolean verify(String hostname, SSLSession session) {
+						return true;
+					}
+				});
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			} catch (UnrecoverableKeyException e) {
