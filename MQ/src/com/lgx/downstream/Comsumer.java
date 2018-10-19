@@ -57,8 +57,8 @@ public class Comsumer {
 				TextMessage msg = (TextMessage) consumer.receive();
 				if (msg != null) {
 					msg.acknowledge();
-					System.out.println(Thread.currentThread().getName() + ": Consumer:我是消费者，我正在消费Msg" + msg.getText()
-							+ "--->" + count.getAndIncrement());
+					System.out.println(
+							Thread.currentThread().getName() + "接收上游客户端的信息：" + msg.getText() + count.getAndIncrement());
 				} else {
 					break;
 				}

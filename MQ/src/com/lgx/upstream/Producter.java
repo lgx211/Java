@@ -22,6 +22,7 @@ public class Producter {
 	// ActiveMQ 的链接地址
 	private static final String BROKEN_URL = ActiveMQConnection.DEFAULT_BROKER_URL;
 
+	// 计算器，多线程下能共享的全局变量
 	AtomicInteger count = new AtomicInteger(0);
 	// 链接工厂
 	ConnectionFactory connectionFactory;
@@ -62,9 +63,9 @@ public class Producter {
 				Thread.sleep(1000);
 				int num = count.getAndIncrement();
 				// 创建一条消息
-				TextMessage msg = session.createTextMessage(
-						Thread.currentThread().getName() + "productor:我是大帅哥，我现在正在生产东西！,count:" + num);
-				System.out.println(Thread.currentThread().getName() + "productor:我是大帅哥，我现在正在生产东西！,count:" + num);
+				TextMessage msg = session
+						.createTextMessage(Thread.currentThread().getName() + "——>上游不断发送消息出去，count:" + num);
+				System.out.println(Thread.currentThread().getName() + "——>上游不断发送消息出去，count:" + num);
 				// 发送消息
 				messageProducer.send(msg);
 				// 提交事务
