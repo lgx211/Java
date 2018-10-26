@@ -2,6 +2,11 @@ package com.lgx.sort;
 
 public class BucketSort {
 
+	/**
+	 * 简化版的桶排序
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// 0-10，11个桶
 		int[] buckets = new int[11];
@@ -25,6 +30,7 @@ public class BucketSort {
 
 		System.out.println("====从小到大排序=====");
 		for (int m = 0; m < 10; m++) {
+			// 这个循环很好，我还以为要if判断
 			for (int n = 0; n < buckets[m]; n++) {
 				System.out.println(m);
 			}
